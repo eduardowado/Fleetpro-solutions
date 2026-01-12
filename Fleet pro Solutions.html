@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetPro Solution | Soluciones en Movimiento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-orange: #ff6600; 
+            --whatsapp-green: #25D366;
+            --dark-bg: #1a1a1a;
+            --light-text: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 1. HERO SECTION --- */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://lh3.googleusercontent.com/d/1eeCtsIEiDEq5XfWtGmMKaP6fYkkfmQzy'); 
+            background-size: cover;
+            background-position: center;
+            min-height: 90vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-text);
+            padding: 30px 20px;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            gap: 25px; 
+            margin-bottom: 30px;
+            flex-wrap: wrap; 
+        }
+
+        .hero-logo {
+            height: 130px; 
+            width: auto;
+            border-radius: 15px; 
+            border: 4px solid var(--primary-orange); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            background-color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 5px solid var(--primary-orange);
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .contact-header {
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 25px 40px; 
+            border-radius: 15px;
+            border: 1px solid #555;
+            max-width: 900px;
+        }
+
+        .slogan {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        .texto-gigante { font-size: 1.6rem; font-weight: bold; color: #fff; margin: 10px 0; }
+        .texto-correo { font-size: 1.3rem; color: #ddd; font-weight: bold; margin: 5px 0; }
+        .contact-header i { color: var(--primary-orange); margin-right: 10px; }
+
+        .btn-mapa {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: white;
+            color: #333;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-mapa i { color: #DB4437; margin-right: 10px; }
+        .btn-mapa:hover { background-color: var(--primary-orange); color: white; transform: scale(1.05); }
+
+        /* --- 2. GALERÍA --- */
+        .gallery-section { padding: 60px 20px; text-align: center; background-color: #fff; }
+        .gallery-section h2 { font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 220px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .gallery-item:hover { transform: translateY(-5px); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-label {
+            position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.8);
+            color: white; padding: 10px 0; font-weight: bold; font-size: 0.85rem;
+        }
+
+        /* --- VISOR GALERÍA (LIGHTBOX) --- */
+        .lightbox {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
+        }
+        .lightbox-content {
+            position: relative; margin: auto; top: 50%; transform: translateY(-50%);
+            width: 90%; max-width: 900px; text-align: center;
+        }
+        .lightbox-image { width: 100%; max-height: 70vh; object-fit: contain; border: 3px solid white; border-radius: 5px; }
+        .lightbox-caption { color: white; font-size: 1.8rem; margin-top: 15px; font-weight: bold; text-transform: uppercase; }
+        .close-btn { position: absolute; top: -60px; right: 0; color: white; font-size: 50px; cursor: pointer; }
+        .prev, .next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            color: white; font-size: 50px; cursor: pointer;
+            padding: 20px; background: rgba(0,0,0,0.3); border-radius: 50%; transition: 0.3s;
+        }
+        .prev { left: -100px; } .next { right: -100px; }
+        .prev:hover, .next:hover { color: var(--primary-orange); background: rgba(255,255,255,0.1); }
+
+        /* --- 3. CORPORATIVO --- */
+        .corporate-section { background-color: var(--dark-bg); color: #ccc; padding: 60px 20px; }
+        .corporate-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .corp-card h3 { color: var(--primary-orange); font-size: 1.8rem; border-left: 4px solid white; padding-left: 10px; margin-bottom: 15px; }
+        .corp-card p { line-height: 1.6; text-align: justify; }
+
+        /* --- 4. FRANJA NARANJA FINAL (DIVIDIDA) --- */
+        .orange-split-footer {
+            background-color: var(--primary-orange);
+            display: flex;
+            flex-wrap: wrap;
+            color: white;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+        }
+
+        .cta-left {
+            flex: 1;
+            min-width: 300px;
+            padding: 50px 5%;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-left h2 { font-size: 2.2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+
+        .btn-whatsapp-box {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-whatsapp-box:hover { transform: scale(1.05); }
+        .btn-whatsapp-box i { font-size: 2rem; margin-right: 15px; }
+
+        .cta-right {
+            flex: 1;
+            min-width: 300px;
+            padding: 50px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            background-color: rgba(0,0,0,0.05); 
+        }
+
+        footer { background-color: black; color: #777; text-align: center; padding: 30px 20px; font-size: 0.9rem; }
+
+        @media (max-width: 1100px) {
+            .prev { left: 10px; } .next { right: 10px; }
+            .cta-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-logo { height: 100px; }
+            .cta-right { text-align: center; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="title-container">
+            <img src="https://lh3.googleusercontent.com/d/1-P-XV-pJxqREzHcm36ngTYK0gIthd0s6" alt="Logo FleetPro" class="hero-logo">
+            <h1>FLEETPRO SOLUTION</h1>
+        </div>
+        
+        <div class="contact-header">
+            <p class="slogan">“Soluciones que mantienen tu camión en movimiento.”</p>
+            <hr style="border: 0; border-top: 1px solid #555; margin: 15px 0;">
+            <p class="texto-gigante"><i class="fa-solid fa-phone"></i> 81 8010 3536</p>
+            <p class="texto-correo"><i class="fa-solid fa-envelope"></i> santos.fleetprosolutions@gmail.com</p>
+            <p class="texto-correo" style="font-size: 1.1rem; line-height: 1.4;">
+                <i class="fa-solid fa-location-dot"></i> Benito Juárez # 105, col. Héroe de Nacozari,<br>Cd. Benito Juárez, N.L.
+            </p>
+            <a href=""https://maps.app.goo.gl/zxpi1Z5B8GvxHDKc8" target="_blank" class="btn-mapa">
+                <i class="fa-solid fa-map-location-dot"></i> Ver Ubicación en Google Maps
+            </a>
+        </div>
+    </header>
+
+    <section class="gallery-section">
+        <h2>Galería de Refacciones</h2>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <div id="myLightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="close-btn" onclick="closeLightbox()">×</span>
+            <span class="prev" onclick="changeSlide(-1)">❮</span>
+            <img id="lightboxImg" class="lightbox-image" src="" alt="">
+            <span class="next" onclick="changeSlide(1)">❯</span>
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <section class="corporate-section">
+        <div class="corporate-container">
+            <div class="corp-card">
+                <h3>¿Quiénes Somos?</h3>
+                <p>En <strong>FleetPro Solution</strong> somos aliados estratégicos de empresas que operan flotillas de camiones de carga. Ofrecemos soluciones integrales de refaccionamiento que optimizan el desempeño, reducen tiempos muertos y aseguran la máxima disponibilidad de cada unidad en operación.</p>
+            </div>
+            <div class="corp-card">
+                <h3>Misión</h3>
+                <p>Proveer soluciones eficientes y confiables en refaccionamiento para camiones de carga, contribuyendo a la continuidad operativa y mejora del rendimiento de nuestros clientes.</p>
+            </div>
+            <div class="corp-card">
+                <h3>Visión</h3>
+                <p>Ser la empresa líder en soluciones de refaccionamiento para camiones de carga, reconocida por su confiabilidad, calidad de servicio y enfoque en resultados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="orange-split-footer">
+        <div class="cta-left">
+            <h2>CONTÁCTANOS</h2>
+            <a href="https://wa.me/528180103536" target="_blank" class="btn-whatsapp-box">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+        <div class="cta-right">
+            <p>Gracias por tu interés en <strong>FleetPro Solutions</strong>, nos complace recibir tus comentarios y atender tus necesidades.</p>
+        </div>
+    </section>
+
+    <footer>
+    <p>© <span id="current-year"></span> FLEETPRO SOLUTION. Todos los derechos reservados.</p>
+    <a href="https://eduardowado.github.io/Aviso-privacidad-FLEETPRO-SOLUTIONS/" 
+       style="color: #777; text-decoration: none; font-size: 0.8rem; display: block; margin-top: 10px;" 
+       onmouseover="this.style.color='#ff6600'" 
+       onmouseout="this.style.color='#777'">
+       Aviso de Privacidad
+    </a>
+</footer>
+
+    <script>
+        const images = [
+            { src: "https://lh3.googleusercontent.com/d/14Sei4hFxKIG6qj1EPEDdwlfFHPVT0H2T", title: "Sistema De Enfriamiento" },
+            { src: "https://lh3.googleusercontent.com/d/1b4eOA-3V4O12z0i7aeFNUpLgBAG0F8Gv", title: "Tambores y Mazas" },
+            { src: "https://lh3.googleusercontent.com/d/1pL9mHfPrrvYF06l8qoUw_g6DOQPscwp5", title: "Remolque y Acoplamiento" },
+            { src: "https://lh3.googleusercontent.com/d/1_rHxuxrDo1GIW-BXBq_j8cQUTf4GQOT6", title: "Lubricantes y Químicos" },
+            { src: "https://lh3.googleusercontent.com/d/10LexMdQJTd6Iea8kcA4zCvGIyyv5LM5h", title: "Eléctrico" },
+            { src: "https://lh3.googleusercontent.com/d/1ATn5WYTIXPjZOrJHkP_wM-iOM76n1LZc", title: "Partes de Motor" },
+            { src: "https://lh3.googleusercontent.com/d/1k9aiOMjfWwgx11BtNXAqJJszX6aShK8c", title: "Sujeción y Carga" },
+            { src: "https://lh3.googleusercontent.com/d/1J2RvzS1kTSJvOCd-IN4lRr_vAD61vsJu", title: "Filtros" },
+            { src: "https://lh3.googleusercontent.com/d/1F3d7XWRLStfgJN16yaQuHhWjKCHqqyCV", title: "Transmisión" },
+            { src: "https://lh3.googleusercontent.com/d/1QTVbjwZCWVIx_VExTJC3tWabFj6NieCh", title: "Sistema Hidráulico" },
+            { src: "https://lh3.googleusercontent.com/d/1Tpd3D65MsXUWveLJpS92AhrNr4YWLywN", title: "Suspensión y Dirección" },
+            { src: "https://lh3.googleusercontent.com/d/1m2yzPnHKtAXfDj3Jjnt6mMD7xopt4Xhm", title: "Sistema de Frenos" }
+        ];
+
+        let currentIndex = 0;
+        const grid = document.getElementById('galleryGrid');
+        images.forEach((img, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.onclick = () => openLightbox(index);
+            item.innerHTML = `<img src="${img.src}" alt="${img.title}"><div class="gallery-label">${img.title}</div>`;
+            grid.appendChild(item);
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            document.getElementById("myLightbox").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+            document.getElementById("myLightbox").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function changeSlide(n) {
+            currentIndex += n;
+            if (currentIndex >= images.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            const img = document.getElementById("lightboxImg");
+            const cap = document.getElementById("lightboxCaption");
+            img.style.opacity = "0";
+            setTimeout(() => {
+                img.src = images[currentIndex].src;
+                cap.innerText = images[currentIndex].title;
+                img.style.opacity = "1";
+            }, 150);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById("myLightbox").style.display === "block") {
+                if (e.key === "ArrowRight") changeSlide(1);
+                if (e.key === "ArrowLeft") changeSlide(-1);
+                if (e.key === "Escape") closeLightbox();
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myLightbox")) closeLightbox();
+        }
+    </script>
+</body>
+</html>
