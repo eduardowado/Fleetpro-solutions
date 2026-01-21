@@ -25,7 +25,7 @@
 
         a { text-decoration: none; color: inherit; }
 
-        /* --- 1. HERO SECTION --- */
+        /* --- 1. SECCIÓN INICIAL (HERO) --- */
         .hero {
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://lh3.googleusercontent.com/d/1eeCtsIEiDEq5XfWtGmMKaP6fYkkfmQzy'); 
             background-size: cover;
@@ -127,7 +127,7 @@
             color: white; padding: 10px 0; font-weight: bold; font-size: 0.85rem;
         }
 
-        /* --- VISOR GALERÍA (LIGHTBOX) --- */
+        /* --- VISOR LIGHTBOX --- */
         .lightbox {
             display: none; position: fixed; z-index: 3000; left: 0; top: 0;
             width: 100%; height: 100%; background-color: rgba(0,0,0,0.95);
@@ -154,13 +154,91 @@
         .corp-card h3 { color: var(--primary-orange); font-size: 1.8rem; border-left: 4px solid white; padding-left: 10px; margin-bottom: 15px; }
         .corp-card p { line-height: 1.6; text-align: justify; }
 
-        /* --- 4. FRANJA NARANJA FINAL (DIVIDIDA) --- */
+        /* --- NUEVA SECCIÓN: COBERTURA (COLORES CAMBIADOS) --- */
+        .coverage-section {
+            /* CAMBIO 1: FONDO NEGRO */
+            background-color: #000000; 
+            color: #fff; /* Texto blanco para que resalte en lo negro si fuera necesario */
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 5px solid var(--primary-orange);
+        }
+        
+        .coverage-container {
+            max-width: 900px;
+            margin: 0 auto;
+            /* CAMBIO 2: FONDO ANARANJADO */
+            background: var(--primary-orange); 
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Sombra clarita para resaltar en negro */
+            text-align: center;
+            color: #1a1a1a; /* Texto oscuro sobre el naranja para que se lea bien */
+        }
+        
+        .coverage-title {
+            font-size: 2.2rem;
+            color: #1a1a1a; /* Color oscuro */
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 2px rgba(255,255,255,0.5);
+        }
+
+        .zones-wrapper {
+            display: inline-block; 
+            text-align: left;      
+            margin: 20px auto;     
+        }
+
+        .zones-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1a1a1a; /* Color oscuro */
+        }
+        
+        .coverage-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .coverage-list li {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #1a1a1a; /* Texto oscuro */
+            font-weight: 500;
+        }
+        .coverage-list i {
+            color: var(--whatsapp-green);
+            font-size: 1.6rem;
+            background-color: white; 
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .coverage-note {
+            /* CAMBIO 3: NOTA BLANCA (para que resalte sobre el naranja) */
+            background-color: white; 
+            color: #d84315;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-style: italic;
+            border-left: 5px solid #d84315;
+            margin-top: 30px;
+        }
+
+        /* --- 4. FRANJA NARANJA DIVIDIDA --- */
         .orange-split-footer {
             background-color: var(--primary-orange);
             display: flex;
             flex-wrap: wrap;
             color: white;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(255,255,255,0.2); /* Línea sutil para separar del bloque naranja de arriba */
         }
 
         .cta-left {
@@ -234,7 +312,7 @@
             <p class="texto-correo" style="font-size: 1.1rem; line-height: 1.4;">
                 <i class="fa-solid fa-location-dot"></i> Benito Juárez # 105, col. Héroe de Nacozari,<br>Cd. Benito Juárez, N.L.
             </p>
-            <a href=""https://maps.app.goo.gl/zxpi1Z5B8GvxHDKc8" target="_blank" class="btn-mapa">
+            <a href="https://maps.app.goo.gl/zxpi1Z5B8GvxHDKc8" target="_blank" class="btn-mapa">
                 <i class="fa-solid fa-map-location-dot"></i> Ver Ubicación en Google Maps
             </a>
         </div>
@@ -272,6 +350,26 @@
         </div>
     </section>
 
+    <section class="coverage-section">
+        <div class="coverage-container">
+            <h3 class="coverage-title">Base Operativa y Zonas de atención</h3>
+            <p style="font-size: 1.3rem; color: #1a1a1a;"><strong>📍 Base Operativa:</strong> Nuevo León, México</p>
+            
+            <div class="zones-wrapper">
+                <p class="zones-title">Zonas de atención:</p>
+                <ul class="coverage-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Nuevo León</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Querétaro</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Guadalajara (Jalisco)</li>
+                </ul>
+            </div>
+
+            <div class="coverage-note">
+                <i class="fa-solid fa-circle-info"></i> Nota: La atención fuera de Nuevo León se realiza bajo coordinación previa y enfoque en proyectos, visitas técnicas o soporte especializado.
+            </div>
+        </div>
+    </section>
+
     <section class="orange-split-footer">
         <div class="cta-left">
             <h2>CONTÁCTANOS</h2>
@@ -284,7 +382,7 @@
         </div>
     </section>
 
-    <footer>
+        <footer>
     <p>© <span id="current-year"></span> FLEETPRO SOLUTION. Todos los derechos reservados.</p>
     <a href="https://eduardowado.github.io/Aviso-privacidad-FLEETPRO-SOLUTIONS/" 
        style="color: #777; text-decoration: none; font-size: 0.8rem; display: block; margin-top: 10px;" 
@@ -295,6 +393,8 @@
 </footer>
 
     <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+
         const images = [
             { src: "https://lh3.googleusercontent.com/d/14Sei4hFxKIG6qj1EPEDdwlfFHPVT0H2T", title: "Sistema De Enfriamiento" },
             { src: "https://lh3.googleusercontent.com/d/1b4eOA-3V4O12z0i7aeFNUpLgBAG0F8Gv", title: "Tambores y Mazas" },
@@ -364,3 +464,4 @@
     </script>
 </body>
 </html>
+
